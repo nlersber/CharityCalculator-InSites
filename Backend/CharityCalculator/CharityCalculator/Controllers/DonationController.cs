@@ -23,7 +23,8 @@ namespace CharityCalculator.Controllers
 
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [HttpGet("currentrate")]
+        [HttpGet]
+        [Route("currentrate")]
         public async Task<ActionResult<double>> GetCurrentTaskRate()
         {
             try
@@ -36,7 +37,8 @@ namespace CharityCalculator.Controllers
             }
         }
 
-        [HttpPut("update")]
+        [HttpPut]
+        [Route("update")]
         public async Task<ActionResult<bool>> SetCurrentTaskRate([FromBody] TaxRateDTO dto)
         {
             try
@@ -49,7 +51,8 @@ namespace CharityCalculator.Controllers
             }
         }
 
-        [HttpGet("deductible")]
+        [HttpGet]
+        [Route("getdeductible")]
         public async Task<ActionResult<double>> GetDeductibleAmount([FromBody] DonationDTO donation)
         {
             try

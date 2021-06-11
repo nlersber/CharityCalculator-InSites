@@ -18,7 +18,7 @@ namespace CharityCalculator.Domain.IServices
         /// </summary>
         /// <param name="amount">New value</param>
         /// <returns>Whether the update was successful</returns>
-        Task<bool> SetCurrentTaxRate(double amount);
+        Task<TaxRate> SetCurrentTaxRate(double amount);
 
         /// <summary>
         /// Calculates the deductible amount for the given donation.

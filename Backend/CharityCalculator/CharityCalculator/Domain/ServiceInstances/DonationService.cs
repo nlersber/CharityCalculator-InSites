@@ -23,12 +23,12 @@ namespace CharityCalculator.Domain.ServiceInstances
             return rate.FirstAsync();
         }
 
-        public async Task<bool> SetCurrentTaxRate(double amount)
+        public async Task<TaxRate> SetCurrentTaxRate(double amount)
         {
             var oldRate = await rate.FirstAsync();
             oldRate.Rate = amount;
-
-            return (await context.SaveChangesAsync() != 0); // Signals success
+            await context.SaveChangesAsync();
+            return await rate.FirstAsync();
         }
 
         public async Task<double> GetDeductableAmount(Donation donation)
