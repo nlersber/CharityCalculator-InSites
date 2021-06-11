@@ -11,6 +11,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CharityCalculator.Data;
+using CharityCalculator.Domain.IServices;
+using CharityCalculator.Domain.ServiceInstances;
+using Microsoft.EntityFrameworkCore;
 
 namespace CharityCalculator
 {
@@ -28,10 +32,19 @@ namespace CharityCalculator
         {
 
             services.AddControllers();
+
+            services.AddScoped<IDonationService, DonationService>();
+
+            services.AddDbContext<Context>(s =>
+            {
+                s.UseSqlite(Configuration.GetConnectionString("SQLite"));
+            });
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CharityCalculator", Version = "v1" });
             });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
