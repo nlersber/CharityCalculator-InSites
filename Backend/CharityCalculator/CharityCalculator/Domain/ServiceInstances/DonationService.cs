@@ -12,15 +12,17 @@ namespace CharityCalculator.Domain.ServiceInstances
     public class DonationService : ServiceBase, IDonationService
     {
         private readonly DbSet<TaxRate> rate;
+        private readonly DbSet<EventType> eventTypes;
 
         public DonationService(Context context) : base(context)
         {
-            this.rate = this.context.TaxRate;
+            rate = this.context.TaxRate;
+            eventTypes = this.context.EventTypes;
         }
 
         public Task<TaxRate> GetCurrentTaxRate()
         {
-            return rate.FirstAsync();
+            return rate.AsNoTracking().FirstAsync();
         }
 
         public async Task<TaxRate> SetCurrentTaxRate(double amount)
@@ -31,11 +33,18 @@ namespace CharityCalculator.Domain.ServiceInstances
             return await rate.FirstAsync();
         }
 
-        public async Task<double> GetDeductableAmount(Donation donation)
+        public async Task<double> GetDeductableAmount(double amount, string eventType)
         {
+            var type = await eventTypes.SingleAsync(s => s.Name == eventType);
+            var donation = new Donation { Amount = amount, Type = type };
             return Math.Round(
-                (await rate.FirstAsync()).CalculateDonationDeductibleAmount(donation), //Get deductible amount
+                (await rate.AsNoTracking().FirstAsync()).CalculateDonationDeductibleAmount(donation), //Get deductible amount
                 2); //Round it to 2 decimals
+        }
+
+        public Task<List<EventType>> GetEventTypes()
+        {
+            return eventTypes.AsNoTracking().ToListAsync();
         }
     }
 }

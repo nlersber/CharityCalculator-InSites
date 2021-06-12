@@ -23,8 +23,11 @@ namespace CharityCalculator.Domain.IServices
         /// <summary>
         /// Calculates the deductible amount for the given donation.
         /// </summary>
-        /// <param name="donation">Donation to calculate deductible amount of</param>
+        /// <param name="amount">Donation to calculate deductible amount of</param>
+        /// <param name="eventType">Type of event</param>
         /// <returns>Deductible amount</returns>
-        Task<double> GetDeductableAmount(Donation donation);
+        Task<double> GetDeductableAmount(double amount, string eventType);
+
+        Task<List<EventType>> GetEventTypes();
     }
 }

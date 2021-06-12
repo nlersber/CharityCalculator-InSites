@@ -5,10 +5,9 @@ using System.Threading.Tasks;
 
 namespace CharityCalculator.Domain.Models
 {
-    public class Donation
+    public class EventType
     {
-        public double Amount { get; set; }
-        public EventType Type { get; set; }
+        public string Name { get; set; }
+        public double Percentage { get; set; }
     }
-
 }

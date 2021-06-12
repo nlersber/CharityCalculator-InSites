@@ -16,7 +16,7 @@ namespace CharityCalculator.Domain.Models
         /// <returns>Deductible amount</returns>
         public double CalculateDonationDeductibleAmount(Donation don)
         {
-            return don.Amount * (Rate / (100 - Rate));
+            return don.Amount * don.Type.Percentage * (Rate / (100 - Rate));
         }
     }
 }

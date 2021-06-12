@@ -11,5 +11,7 @@ namespace CharityCalculator.DTOs
         [Required]
         [Range(0, double.MaxValue)]
         public double Amount { get; set; }
+
+        public string Type { get; set; }
     }
 }

@@ -22,7 +22,7 @@ namespace CharityCalculator.Data
 
         public async Task Init()
         {
-
+            await context.Database.EnsureDeletedAsync();
             if (await context.Database.EnsureCreatedAsync())
             {
                 await CreateRoles();
@@ -35,6 +35,14 @@ namespace CharityCalculator.Data
         {
             var rate = new TaxRate { Rate = 20D };
             await context.TaxRate.AddAsync(rate);
+
+            await context.AddRangeAsync(new[]
+            {
+                new EventType{Name = "Sports", Percentage = 1.05},
+                new EventType{Name = "Political", Percentage = 1.03},
+                new EventType{Name = "Other", Percentage = 1}
+
+            });
             await context.SaveChangesAsync();
         }
 

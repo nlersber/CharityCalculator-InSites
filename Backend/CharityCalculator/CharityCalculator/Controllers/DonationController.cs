@@ -4,14 +4,18 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CharityCalculator.Controllers.Annotations;
 using CharityCalculator.Domain.IServices;
 using CharityCalculator.Domain.Models;
 using CharityCalculator.DTOs;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CharityCalculator.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class DonationController : ControllerBase
     {
         private readonly IDonationService donationService;
@@ -39,6 +43,7 @@ namespace CharityCalculator.Controllers
 
         [HttpPut]
         [Route("update")]
+        [AuthorizeSiteAdmin]
         public async Task<ActionResult<bool>> SetCurrentTaskRate([FromBody] TaxRateDTO dto)
         {
             try
@@ -52,12 +57,12 @@ namespace CharityCalculator.Controllers
         }
 
         [HttpGet]
-        [Route("getdeductible")]
+        [Route("calculateamount")]
         public async Task<ActionResult<double>> GetDeductibleAmount([FromBody] DonationDTO donation)
         {
             try
             {
-                return Ok(await donationService.GetDeductableAmount(new Donation { Amount = donation.Amount }));
+                return Ok(await donationService.GetDeductableAmount(donation.Amount, donation.Type));
             }
             catch (Exception)
             {
