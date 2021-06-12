@@ -1,0 +1,16 @@
+  <div class="wrapper">
+
+    <mat-tab-group>
+
+      <!-- Home screen -->
+      <mat-tab label="Donor">
+        <app-donor></app-donor>
+      </mat-tab>
+
+      <!-- Admin module -->
+      <mat-tab label="Site Admin" *ngIf="hasRole('siteadmin')">
+        <app-admin></app-admin>
+      </mat-tab>
+
+    </mat-tab-group>
+  </div>

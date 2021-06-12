@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using CharityCalculator.Controllers.DTOs;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace CharityCalculator.Controllers
 {
@@ -29,6 +30,17 @@ namespace CharityCalculator.Controllers
             this.signInManager = signInManager;
             this.userManager = userManager;
             this.config = config;
+        }
+
+        /// <summary>
+        /// Gets the roles of the currently logged in user
+        /// </summary>
+        /// <returns>List of roles</returns>
+        [HttpGet("roles")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public async Task<IList<string>> GetRolesAsync()
+        {
+            return await userManager.GetRolesAsync(await userManager.FindByNameAsync(User.Identity.Name));
         }
 
         /// <summary>
@@ -57,7 +69,7 @@ namespace CharityCalculator.Controllers
             var claims = new List<Claim> { new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName) };
             claims.AddRange((await userManager.GetRolesAsync(user)).Select(s => new Claim(ClaimTypes.Role, s)));
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["Tokens:Key"]));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("SomeRandomSecurityKeyButICouldNotShareThisOverGitHubSoThereYouGo"));
 
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 

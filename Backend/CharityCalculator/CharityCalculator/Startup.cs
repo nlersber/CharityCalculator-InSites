@@ -55,7 +55,7 @@ namespace CharityCalculator
                     x.TokenValidationParameters = new TokenValidationParameters
                     {
                         ValidateIssuerSigningKey = true,
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Tokens:Key"])),
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("SomeRandomSecurityKeyButICouldNotShareThisOverGitHubSoThereYouGo")),
                         ValidateIssuer = false,
                         ValidateAudience = false
                     };
