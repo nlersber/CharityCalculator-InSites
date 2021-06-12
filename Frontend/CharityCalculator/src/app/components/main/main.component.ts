@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
@@ -10,7 +11,7 @@ export class MainComponent implements OnInit {
 
   private roles: string[] = []
 
-  constructor(private auth: AuthService) {
+  constructor(private auth: AuthService, private router: Router) {
     this.auth.getRoles().subscribe(s => this.roles = s.map(s => s.toLowerCase()))
   }
 
@@ -22,8 +23,8 @@ export class MainComponent implements OnInit {
   }
 
   logout(){
-    this.auth.logout
-    
+    this.auth.logout()
+    this.router.navigate(["/login"])
   }
 
 }

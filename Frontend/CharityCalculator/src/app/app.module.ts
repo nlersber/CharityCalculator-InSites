@@ -10,7 +10,7 @@ import { AdminComponent } from './components/admin/admin.component';
 import { MaterialModule } from './components/material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthGuard } from './auth/auth.guard';
-import { DonorComponent } from './donor/donor.component';
+import { DonorComponent } from './components/donor/donor.component';
 import { HttpClientModule } from '@angular/common/http';
 import { httpInterceptorProviders } from './auth';
 

@@ -70,5 +70,19 @@ namespace CharityCalculator.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("events")]
+        public async Task<ActionResult<List<EventType>>> GetEventTypes()
+        {
+            try
+            {
+                return Ok(await donationService.GetEventTypes());
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
+        }
+
     }
 }

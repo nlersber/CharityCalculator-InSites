@@ -1,0 +1,22 @@
+<form [formGroup]="form" (ngSubmit)="checkDonation()">
+  <p>
+    <mat-form-field appearance="fill">
+      <input type="number" matInput placeholder="Donation amount" formControlName="amount">
+      <span matPrefix>€&nbsp;</span>
+    </mat-form-field>
+  </p>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Event type</mat-label>
+    <mat-select>
+      <mat-option *ngFor="let type of events" value="{type.name}">{{type.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div>
+    <button type="submit" mat-raised-button color="accent">Calculate</button>
+  </div>
+
+</form>
+

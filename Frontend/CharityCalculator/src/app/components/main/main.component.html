@@ -1,15 +1,23 @@
+  <nav>
+    <button mat-raised-button color="error" (click)="logout()">Logout</button>
+  </nav>
+
   <div class="wrapper">
 
     <mat-tab-group>
 
       <!-- Home screen -->
       <mat-tab label="Donor">
-        <app-donor></app-donor>
+        <div class="tabwrapper">
+          <app-donor></app-donor>
+        </div>
       </mat-tab>
 
       <!-- Admin module -->
       <mat-tab label="Site Admin" *ngIf="hasRole('siteadmin')">
-        <app-admin></app-admin>
+        <div class="tabwrapper">
+          <app-admin></app-admin>
+        </div>
       </mat-tab>
 
     </mat-tab-group>
