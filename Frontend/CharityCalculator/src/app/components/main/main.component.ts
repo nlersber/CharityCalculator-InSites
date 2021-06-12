@@ -21,4 +21,9 @@ export class MainComponent implements OnInit {
     return this.roles.includes(role.toLowerCase())
   }
 
+  logout(){
+    this.auth.logout
+    
+  }
+
 }

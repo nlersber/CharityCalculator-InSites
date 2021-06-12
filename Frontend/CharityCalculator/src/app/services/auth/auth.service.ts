@@ -70,7 +70,7 @@ export class AuthService {
    */
   hasRole(role: string[]): Observable<boolean> {
     let response =
-      ((!!this.roles)
+      ((!!this.roles)// Returns roles if already loaded, else fetches as observable 
         ? of(this.roles)
         : this.getRoles())
 
