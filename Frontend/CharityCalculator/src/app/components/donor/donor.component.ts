@@ -15,7 +15,9 @@ export class DonorComponent implements OnInit {
   hasSubmitted: boolean
 
   currentRate: number
-  events: EventType[]
+  events: EventType[] = []
+
+  amount = 0
 
   constructor(private data: DataService, fb: FormBuilder) {
     this.data.getCurrentRate().subscribe(
@@ -32,15 +34,22 @@ export class DonorComponent implements OnInit {
       )
 
       this.form=fb.group({
-        amount: fb.control("0", [Validators.required, Validators.min(0)])
+        amount: fb.control("0", [Validators.required, Validators.min(0)]),
+        event: fb.control("", Validators.required)
       })
    }
 
   ngOnInit(): void {
   }
 
-  checkDonation(){
-    console.log("Test");
+  getDeductible(){
+    if(this.form.invalid){
+      return;
+    }
+    var amount = this.form.get("amount").value
+    var event = this.form.get("event").value
+    this.data.getDeductibleAmount(amount, event).subscribe(s=> this.amount=s)
+    
   }
 
 }

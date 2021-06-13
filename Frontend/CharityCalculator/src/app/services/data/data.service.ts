@@ -19,4 +19,8 @@ export class DataService {
     return this.http.get<EventType[]>(`${environment.apiUrl}/donation/events`)
   }
 
+  getDeductibleAmount(amount: number, event: string): Observable<number>{
+    return this.http.post<number>(`${environment.apiUrl}/donation/calculateamount`, {amount, type: event})
+  }
+
 }

@@ -1,4 +1,4 @@
-<form [formGroup]="form" (ngSubmit)="checkDonation()">
+<form [formGroup]="form" (ngSubmit)="getDeductible()">
   <p>
     <mat-form-field appearance="fill">
       <input type="number" matInput placeholder="Donation amount" formControlName="amount">
@@ -8,8 +8,8 @@
 
   <mat-form-field appearance="fill">
     <mat-label>Event type</mat-label>
-    <mat-select>
-      <mat-option *ngFor="let type of events" value="{type.name}">{{type.name}}
+    <mat-select formControlName="event">
+      <mat-option *ngFor="let type of events" value="{{type.name}}">{{type.name}}
       </mat-option>
     </mat-select>
   </mat-form-field>
@@ -20,3 +20,7 @@
 
 </form>
 
+<div class="wrapper">
+  <h2>Your deductible amount is:</h2>
+  <p>{{amount | currency: "EUR"}}</p>
+</div>

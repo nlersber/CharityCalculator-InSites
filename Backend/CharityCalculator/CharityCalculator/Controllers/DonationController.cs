@@ -56,7 +56,7 @@ namespace CharityCalculator.Controllers
             }
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("calculateamount")]
         public async Task<ActionResult<double>> GetDeductibleAmount([FromBody] DonationDTO donation)
         {
