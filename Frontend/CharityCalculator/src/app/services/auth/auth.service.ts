@@ -29,15 +29,22 @@ export class AuthService {
     this.user = new BehaviorSubject<string>(parsedToken && parsedToken.unique_name)
   }
 
+/** Subject containing current user */
   get user$(): BehaviorSubject<string> {
     return this.user
   }
 
+  /** JWT token of logged in user */
   get token(): string {
     const localToken = localStorage.getItem(this.tokenKey)
     return !!localToken ? localToken : ''
   }
 
+  /**
+   * Logs in user
+   * @param username Username
+   * @param password Password
+   */
   login(username: string, password: string): Observable<boolean> {
     return this.http.post(
       `${environment.apiUrl}/auth/login`,
@@ -56,6 +63,9 @@ export class AuthService {
     )
   }
 
+  /**
+   * Logs out the user without routing
+   */
   logout() {
     if (this.user.getValue()) {
       localStorage.removeItem('currentUser')
@@ -84,6 +94,9 @@ export class AuthService {
     ))
   }
 
+  /**
+   * Fetches roles logged in user has
+   */
   getRoles(): Observable<string[]> {
     return this.http.get<string[]>(`${environment.apiUrl}/auth/roles`)
   }

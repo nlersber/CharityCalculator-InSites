@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { EventType } from 'src/app/models';
+import { EventType } from 'src/app/models/models';
 import { DataService } from 'src/app/services/data/data.service';
 
 @Component({
@@ -20,11 +20,14 @@ export class DonorComponent implements OnInit {
   amount = 0
 
   constructor(private data: DataService, fb: FormBuilder) {
+
+    // Fetch event types
       this.data.getEventTypes().subscribe(
         s=> this.events = s,
         err => console.log(err)
       )
 
+      // Fetch current rate
       this.data.getCurrentRate().subscribe(s=> this.currentRate=s)
 
       this.form=fb.group({
@@ -37,9 +40,9 @@ export class DonorComponent implements OnInit {
   }
 
   getDeductible(){
-    if(this.form.invalid){
+    if(this.form.invalid)
       return;
-    }
+    
     var amount = this.form.get("amount").value
     var event = this.form.get("event").value
     this.data.getDeductibleAmount(amount, event).subscribe(s=> this.amount=s)

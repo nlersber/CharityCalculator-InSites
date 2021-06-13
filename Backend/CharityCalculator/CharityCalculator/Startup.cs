@@ -29,8 +29,6 @@ namespace CharityCalculator
         public void ConfigureServices(IServiceCollection services)
         {
 
-
-
             services.AddScoped<IDonationService, DonationService>();
             services.AddScoped<DataInit>();
 

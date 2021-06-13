@@ -1,1 +1,26 @@
-<p>optimal works!</p>
+<form [formGroup]="form" (ngSubmit)="calculateSplit()">
+  <p>
+    <mat-form-field appearance="fill">
+      <input type="number" matInput placeholder="Donation amount" formControlName="amount">
+      <span matPrefix>€&nbsp;</span>
+    </mat-form-field>
+  </p>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Event type</mat-label>
+    <mat-select formControlName="event">
+      <mat-option *ngFor="let type of events" value="{{type.name}}">{{type.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div>
+    <button type="submit" mat-raised-button color="accent">Calculate</button>
+  </div>
+
+</form>
+
+<div class="wrapper" *ngIf="!!split.length">
+  <h2>The optimal split is:</h2>
+  <p *ngFor="let item of split">{{item | currency: "EUR"}}</p>
+</div>

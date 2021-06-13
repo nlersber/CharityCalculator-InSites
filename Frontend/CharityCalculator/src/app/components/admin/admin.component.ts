@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Observable, of } from 'rxjs';
 import { DataService } from 'src/app/services/data/data.service';
 
 @Component({
@@ -8,24 +7,20 @@ import { DataService } from 'src/app/services/data/data.service';
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.scss']
 })
-export class AdminComponent implements OnInit {
+export class AdminComponent {
 
   form: FormGroup
   currentRate: number = 0
 
   constructor(private data: DataService, fb: FormBuilder) {
-
+    // Setup form
     this.form=fb.group({
       amount: fb.control(null, [Validators.required, Validators.min(0)])
     })
 
+    // Get current rate
     this.data.getCurrentRate().subscribe(s=> this.currentRate=s)
-
-    
    }
-
-  ngOnInit(): void {
-  }
 
   setRate(){
     if(this.form.invalid)return;

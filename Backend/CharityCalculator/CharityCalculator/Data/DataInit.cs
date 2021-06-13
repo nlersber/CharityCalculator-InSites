@@ -38,9 +38,9 @@ namespace CharityCalculator.Data
 
             await context.AddRangeAsync(new[]
             {
-                new EventType{Name = "Sports", Percentage = 5},
-                new EventType{Name = "Political", Percentage = 3},
-                new EventType{Name = "Other", Percentage = 0}
+                new EventType{Name = "Sports", Percentage = 5, MaxAmount = 100000},
+                new EventType{Name = "Political", Percentage = 3, MaxAmount = 50000},
+                new EventType{Name = "Other", Percentage = 0, MaxAmount = 10000}
 
             });
             await context.SaveChangesAsync();
