@@ -7,7 +7,17 @@ namespace CharityCalculator.Domain.Models
 {
     public class TaxRate
     {
+        public int Id { get; set; }
         public double Rate { get; set; }
+
+        /// <summary>
+        /// Returns a decimal version of the percentage
+        /// </summary>
+        /// <returns>Decimal</returns>
+        public double GetDecimal()
+        {
+            return Rate / 100;
+        }
 
         /// <summary>
         /// Calculates the Deductible amount for the provided donation
@@ -16,7 +26,7 @@ namespace CharityCalculator.Domain.Models
         /// <returns>Deductible amount</returns>
         public double CalculateDonationDeductibleAmount(Donation don)
         {
-            return don.Amount * don.Type.Percentage * (Rate / (100 - Rate));
+            return don.Amount * (don.Type.AsDecimal()+1) * (Rate / (100 - Rate));
         }
     }
 }

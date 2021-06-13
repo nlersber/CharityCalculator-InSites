@@ -13,6 +13,7 @@ import { AuthGuard } from './auth/auth.guard';
 import { DonorComponent } from './components/donor/donor.component';
 import { HttpClientModule } from '@angular/common/http';
 import { httpInterceptorProviders } from './auth';
+import { OptimalComponent } from './components/optimal/optimal.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { httpInterceptorProviders } from './auth';
     LoginComponent,
     MainComponent,
     AdminComponent,
-    DonorComponent
+    DonorComponent,
+    OptimalComponent
   ],
   imports: [
     BrowserModule,

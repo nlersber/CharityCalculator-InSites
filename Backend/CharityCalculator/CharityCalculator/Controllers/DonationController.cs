@@ -33,7 +33,7 @@ namespace CharityCalculator.Controllers
         {
             try
             {
-                return Ok(await donationService.GetCurrentTaxRate());
+                return Ok((await donationService.GetCurrentTaxRate()).Rate);
             }
             catch (Exception)
             {
@@ -48,9 +48,9 @@ namespace CharityCalculator.Controllers
         {
             try
             {
-                return Ok(await donationService.SetCurrentTaxRate(dto.Amount));
+                return Ok((await donationService.SetCurrentTaxRate(dto.Amount)).Rate);
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return BadRequest("Some error message");
             }

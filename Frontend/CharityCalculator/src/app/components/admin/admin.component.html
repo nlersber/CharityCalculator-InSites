@@ -1,1 +1,18 @@
-<p>admin works!</p>
+<form [formGroup]="form" (ngSubmit)="setRate()">
+
+    <p>
+        <strong>Current rate: {{currentRate}}%</strong>
+    </p>
+
+    <p>
+      <mat-form-field appearance="fill">
+        <input type="number" value="{{currentRate}}" matInput placeholder="Rate" formControlName="amount">
+        <span matPrefix>€&nbsp;</span>
+      </mat-form-field>
+    </p>
+  
+    <div>
+      <button type="submit" mat-raised-button color="accent">Save</button>
+    </div>
+  
+  </form>

@@ -20,18 +20,12 @@ export class DonorComponent implements OnInit {
   amount = 0
 
   constructor(private data: DataService, fb: FormBuilder) {
-    this.data.getCurrentRate().subscribe(
-      s=> this.currentRate=s,
-      err => {
-        console.log(err)
-        this.currentRate=20
-      }
-      )
-
       this.data.getEventTypes().subscribe(
         s=> this.events = s,
         err => console.log(err)
       )
+
+      this.data.getCurrentRate().subscribe(s=> this.currentRate=s)
 
       this.form=fb.group({
         amount: fb.control("0", [Validators.required, Validators.min(0)]),

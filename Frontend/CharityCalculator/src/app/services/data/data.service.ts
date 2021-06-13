@@ -23,4 +23,8 @@ export class DataService {
     return this.http.post<number>(`${environment.apiUrl}/donation/calculateamount`, {amount, type: event})
   }
 
+  setCurrentRate(amount: number): Observable<number>{
+    return this.http.put<number>(`${environment.apiUrl}/donation/update`, {amount})
+  }
+
 }

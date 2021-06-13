@@ -13,12 +13,21 @@
         </div>
       </mat-tab>
 
+      <!-- Optimal division for donations -->
+      <mat-tab label="Optimal donation">
+        <div class="tabwrapper">
+          <app-optimal></app-optimal>
+        </div>
+      </mat-tab>
+
       <!-- Admin module -->
       <mat-tab label="Site Admin" *ngIf="hasRole('siteadmin')">
         <div class="tabwrapper">
           <app-admin></app-admin>
         </div>
       </mat-tab>
+
+
 
     </mat-tab-group>
   </div>
